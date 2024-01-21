@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" th:src="@{/js/sports.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <title>Spring consuming rest example</title>
+</head>
+
+    <body>
+        <div class="container-fluid bg-dark text-white d-flex justify-content-center">
+            <h2>MP3-UF6 MLS Stats API (from: rapidapi)</h2>
+        </div>
+
+        <table class="table table-responsive-sm">
+            <thead>
+                <tr class="table-primary">
+                    <th>Equip</th>
+                    <th>Partits jugats</th>
+                    <th>Victòries</th>
+                    <th>Derrotes</th>
+                    <th>Empats</th>
+                    <th>Gols a favor</th>
+                    <th>Gols en contra</th>
+                    <th>Diferència de gols</th>
+                    <th>Punts</th>
+                </tr>
+            </thead>
+            <tbody th:each="sp:${mls}">
+            <tr>
+                <td>
+                    <img th:src="${sp.team().logo()}" alt="Logo" width="40" height="40">
+                    <span th:text="${sp.team().name()}"></span>
+                </td>
+                <td th:text="${sp.stats().gamesPlayed()}"></td>
+                <td th:text="${sp.stats().wins()}"></td>
+                <td th:text="${sp.stats().losses()}"></td>
+                <td th:text="${sp.stats().ties()}"></td>
+                <td th:text="${sp.stats().goalsFor()}"></td>
+                <td th:text="${sp.stats().goalsAgainst()}"></td>
+                <td th:text="${sp.stats().goalDifference()}"></td>
+                <td th:text="${sp.stats().points()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    <div id="chart">
+
+    </div>
+    </body>
+
+</html>
